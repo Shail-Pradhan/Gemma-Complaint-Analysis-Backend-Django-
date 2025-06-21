@@ -32,6 +32,7 @@ try:
                 'complaint_query': {'bsonType': 'string'},
                 'priority_score': {'bsonType': 'int'},
                 'department': {'bsonType': 'string'},
+                'recommended_officer': {'bsonType': 'string'},
                 'ai_analysis': {
                     'bsonType': 'object',
                     'properties': {
@@ -41,6 +42,10 @@ try:
                         'summary': {'bsonType': 'string'},
                         'suggested_actions': {'bsonType': 'array', 'items': {'bsonType': 'string'}}
                     }
+                },
+                'status': {
+                    'bsonType': 'string',
+                    'enum': ['in_progress', 'resolved', 'pending_review']
                 }
             }
         }

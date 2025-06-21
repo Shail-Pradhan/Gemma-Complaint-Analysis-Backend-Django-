@@ -1,24 +1,25 @@
-"""
-URL configuration for AIComplaintBackend project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
+
+def home(request):
+    html = """
+    <h2>Welcome to the AI Complaint Backend API</h2>
+    <p>Available endpoints:</p>
+    <ul>
+        <li><a href="/admin/">/admin/</a> - Django Admin</li>
+        <li><a href="/api/complaints/">/api/complaints/</a> - List all complaints (GET)</li>
+        <li><a href="/api/complaints/create/">/api/complaints/create/</a> - Create a new complaint (POST)</li>
+        <li><a href="/api/complaints/&lt;complaint_id&gt;/">/api/complaints/&lt;complaint_id&gt;/</a> - Retrieve a complaint (GET)</li>
+        <li><a href="/api/complaints/&lt;complaint_id&gt;/update/">/api/complaints/&lt;complaint_id&gt;/update/</a> - Update a complaint (PATCH)</li>
+        <li><a href="/api/complaints/&lt;complaint_id&gt;/delete/">/api/complaints/&lt;complaint_id&gt;/delete/</a> - Delete a complaint (DELETE)</li>
+        <li><a href="/api/">/api/</a> - API Guide</li>
+    </ul>
+    """
+    return HttpResponse(html)
 
 urlpatterns = [
+    path('', home),
     path('admin/', admin.site.urls),
     path('api/', include('AiApp.urls')),
 ]
